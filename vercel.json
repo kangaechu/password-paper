@@ -1,7 +1,7 @@
 {
   "functions": {
-    "api/generate.py": {
-      "runtime": "python3.12"
+    "api/*.py": {
+      "runtime": "@vercel/python"
     }
   }
 }
