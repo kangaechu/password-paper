@@ -52,5 +52,5 @@ uv run main.py
 デプロイ後、以下のURLにアクセスするとPDFがダウンロードされます：
 
 ```
-https://your-project.vercel.app/api/generate
+https://your-project.vercel.app/generate
 ```
