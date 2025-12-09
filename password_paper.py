@@ -45,7 +45,7 @@ def create_password_sheet(output):
     # グリッドの計算（ヘッダー行1行分を考慮）
     usable_width = width - 2 * MARGIN
     usable_height = height - 2 * MARGIN - CELL_SIZE
-    cols = int(usable_width // CELL_SIZE)
+    cols = min(int(usable_width // CELL_SIZE), 20)  # 最大20列
     rows = int(usable_height // CELL_SIZE)
 
     # グリッドを中央揃えにするためのオフセット
