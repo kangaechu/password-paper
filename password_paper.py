@@ -100,6 +100,10 @@ def create_password_sheet(output):
             c.setLineWidth(0.5)
             c.rect(x, y, CELL_SIZE, CELL_SIZE)
 
+            # 26行目以降は空のセル
+            if row >= 25:
+                continue
+
             char = generate_random_char()
             c.setFillColorRGB(0, 0, 0)
 
