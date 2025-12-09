@@ -68,7 +68,7 @@ def create_password_sheet(output):
         c.rect(x, header_y, CELL_SIZE, CELL_SIZE, fill=1, stroke=1)
 
         c.setFillColorRGB(0, 0, 0)
-        col_num = str(col + 1)
+        col_num = str((col + 1) % 10)  # 下1桁のみ表示
         text_width = c.stringWidth(col_num, "Courier", FONT_SIZE)
         text_x = x + (CELL_SIZE - text_width) / 2
         text_y = header_y + (CELL_SIZE - FONT_SIZE) / 2 + 2
