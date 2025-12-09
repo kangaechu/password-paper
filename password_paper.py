@@ -42,14 +42,14 @@ def create_password_sheet(output):
     width, height = A4
     c = canvas.Canvas(output, pagesize=A4)
 
-    # グリッドの計算（ヘッダー行1行分を考慮）
-    usable_width = width - 2 * MARGIN
-    usable_height = height - 2 * MARGIN - CELL_SIZE
+    # グリッドの計算（ヘッダー行・列1つ分を考慮）
+    usable_width = width - 2 * MARGIN - CELL_SIZE  # 左側ヘッダー列分を引く
+    usable_height = height - 2 * MARGIN - CELL_SIZE  # 上側ヘッダー行分を引く
     cols = min(int(usable_width // CELL_SIZE), 20)  # 最大20列
     rows = int(usable_height // CELL_SIZE)
 
-    # グリッドを中央揃えにするためのオフセット
-    grid_width = cols * CELL_SIZE
+    # グリッドを中央揃えにするためのオフセット（ヘッダー列を含む）
+    grid_width = (cols + 1) * CELL_SIZE  # ヘッダー列を含む
     grid_height = rows * CELL_SIZE
     x_offset = (width - grid_width) / 2
     y_offset = (height - grid_height) / 2
@@ -60,7 +60,7 @@ def create_password_sheet(output):
     # ヘッダー行（列番号）を描画
     header_y = y_offset + rows * CELL_SIZE
     for col in range(cols):
-        x = x_offset + col * CELL_SIZE
+        x = x_offset + (col + 1) * CELL_SIZE  # ヘッダー列分ずらす
 
         c.setFillColorRGB(0.85, 0.85, 0.85)
         c.setStrokeColorRGB(0.7, 0.7, 0.7)
@@ -74,9 +74,26 @@ def create_password_sheet(output):
         text_y = header_y + (CELL_SIZE - FONT_SIZE) / 2 + 2
         c.drawString(text_x, text_y, col_num)
 
+    # ヘッダー列（行番号）を描画
+    for row in range(rows):
+        x = x_offset
+        y = y_offset + (rows - 1 - row) * CELL_SIZE
+
+        c.setFillColorRGB(0.85, 0.85, 0.85)
+        c.setStrokeColorRGB(0.7, 0.7, 0.7)
+        c.setLineWidth(0.5)
+        c.rect(x, y, CELL_SIZE, CELL_SIZE, fill=1, stroke=1)
+
+        c.setFillColorRGB(0, 0, 0)
+        row_num = str((row + 1) % 10)  # 下1桁のみ表示
+        text_width = c.stringWidth(row_num, "Courier", FONT_SIZE)
+        text_x = x + (CELL_SIZE - text_width) / 2
+        text_y = y + (CELL_SIZE - FONT_SIZE) / 2 + 2
+        c.drawString(text_x, text_y, row_num)
+
     for row in range(rows):
         for col in range(cols):
-            x = x_offset + col * CELL_SIZE
+            x = x_offset + (col + 1) * CELL_SIZE  # ヘッダー列分ずらす
             y = y_offset + (rows - 1 - row) * CELL_SIZE
 
             c.setStrokeColorRGB(0.7, 0.7, 0.7)
