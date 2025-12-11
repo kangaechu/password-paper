@@ -55,7 +55,7 @@ def create_password_sheet(output):
     y_offset = (height - grid_height) / 2
 
     # フォント設定
-    c.setFont("Courier", FONT_SIZE)
+    c.setFont("Helvetica", FONT_SIZE)
 
     # ヘッダー行（列番号）を描画
     header_y = y_offset + rows * CELL_SIZE
@@ -69,7 +69,7 @@ def create_password_sheet(output):
 
         c.setFillColorRGB(0, 0, 0)
         col_num = str((col + 1) % 10)  # 下1桁のみ表示
-        text_width = c.stringWidth(col_num, "Courier", FONT_SIZE)
+        text_width = c.stringWidth(col_num, "Helvetica", FONT_SIZE)
         text_x = x + (CELL_SIZE - text_width) / 2
         text_y = header_y + (CELL_SIZE - FONT_SIZE) / 2 + 2
         c.drawString(text_x, text_y, col_num)
@@ -86,7 +86,7 @@ def create_password_sheet(output):
 
         c.setFillColorRGB(0, 0, 0)
         row_num = str((row + 1) % 10)  # 下1桁のみ表示
-        text_width = c.stringWidth(row_num, "Courier", FONT_SIZE)
+        text_width = c.stringWidth(row_num, "Helvetica", FONT_SIZE)
         text_x = x + (CELL_SIZE - text_width) / 2
         text_y = y + (CELL_SIZE - FONT_SIZE) / 2 + 2
         c.drawString(text_x, text_y, row_num)
@@ -107,7 +107,7 @@ def create_password_sheet(output):
             char = generate_random_char()
             c.setFillColorRGB(0, 0, 0)
 
-            text_width = c.stringWidth(char, "Courier", FONT_SIZE)
+            text_width = c.stringWidth(char, "Helvetica", FONT_SIZE)
             text_x = x + (CELL_SIZE - text_width) / 2
             text_y = y + (CELL_SIZE - FONT_SIZE) / 2 + 2
             c.drawString(text_x, text_y, char)
