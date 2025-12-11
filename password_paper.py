@@ -112,10 +112,21 @@ def create_password_sheet(output):
             text_y = y + (CELL_SIZE - FONT_SIZE) / 2 + 2
             c.drawString(text_x, text_y, char)
 
+            # 大文字の場合は下線を引く
+            if char in UPPERCASE:
+                underline_y = text_y - 1
+                c.setStrokeColorRGB(0, 0, 0)
+                c.setLineWidth(0.8)
+                c.line(text_x, underline_y, text_x + text_width, underline_y)
+
     # フッター
     c.setFont("Helvetica", 8)
     c.setFillColorRGB(0.5, 0.5, 0.5)
     c.drawString(MARGIN, 10 * mm, f"Generated: {date.today()}")
+    # 右側に大文字の説明
+    note_text = "Underlined = UPPERCASE"
+    note_width = c.stringWidth(note_text, "Helvetica", 8)
+    c.drawString(width - MARGIN - note_width, 10 * mm, note_text)
 
     c.save()
     return cols, rows
