@@ -119,6 +119,12 @@ def create_password_sheet(output):
                 c.setLineWidth(0.8)
                 c.line(text_x, underline_y, text_x + text_width, underline_y)
 
+    # ヘッダー（説明文）
+    c.setFont("Helvetica", 8)
+    c.setFillColorRGB(0.5, 0.5, 0.5)
+    header_text_y = header_y + CELL_SIZE + 3 * mm
+    c.drawString(MARGIN, header_text_y, "Underlined letters are uppercase / 下線付きの文字は大文字です")
+
     # フッター
     c.setFont("Helvetica", 8)
     c.setFillColorRGB(0.5, 0.5, 0.5)
